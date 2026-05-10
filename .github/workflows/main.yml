@@ -1,0 +1,21 @@
+name: Job Bot Run
+on:
+  schedule:
+    - cron: '0 */6 * * *' # প্রতি ৬ ঘণ্টা পর পর নিজে থেকেই চলবে
+  workflow_dispatch: # আপনি নিজেও যখন ইচ্ছা বাটন টিপে চালাতে পারবেন
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install requests beautifulsoup4
+      - name: Run Bot
+        run: python bot.py
+        
